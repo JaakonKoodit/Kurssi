@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import nameService from "./services/nameservice";
+import nameService from "./services/nameService";
 
 const FilterInput = ({ value, onChange }) => {
   return <input type="text" value={value} onChange={onChange} />;
