@@ -1,0 +1,9 @@
+POST https://render-test-eozx.onrender.com/api/notes
+Content-Type: application/json
+
+{
+    "content": "terve terve",
+    "important": true,
+    "jeesus": "jepulis"
+
+}
