@@ -1,0 +1,7 @@
+PUT http://localhost:3001/api/notes/6564c17dbd422d60ab680581
+
+
+{
+    "content": "vittu saatana",
+    "important": true
+}

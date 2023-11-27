@@ -75,7 +75,7 @@ const App = () => {
         setPersons(initialNames);
       })
       .catch((error) => console.log("fail"));
-  }, []);
+  }, [persons]);
 
   const addSuccMsg = (message) => {
     setSuccessMessage(message);
