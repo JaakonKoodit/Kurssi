@@ -1,33 +1,17 @@
-require("dotenv").config();
 const express = require("express");
-const cors = require("cors");
 const app = express();
-const mongoose = require("mongoose");
+const cors = require("cors");
+require("dotenv").config();
+
 const Note = require("./models/note");
-const morgan = require("morgan");
 
-app.use(express.json());
-app.use(cors());
-app.use(express.static("dist"));
-app.use(morgan("tiny"));
-
-let notes = [
-  {
-    id: 1,
-    content: "HTML is easy",
-    important: true,
-  },
-  {
-    id: 2,
-    content: "Browser can execute only JavaScript",
-    important: false,
-  },
-  {
-    id: 3,
-    content: "GET and POST are the most important methods of HTTP protocol",
-    important: true,
-  },
-];
+const requestLogger = (request, response, next) => {
+  console.log("Method:", request.method);
+  console.log("Path:  ", request.path);
+  console.log("Body:  ", request.body);
+  console.log("---");
+  next();
+};
 
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: "unknown input" });
@@ -45,9 +29,10 @@ const errorHandler = (error, request, response, next) => {
   next(error);
 };
 
-// app.get("/", (req, res) => {
-//   res.send("<h1>Hello World </h1>");
-// });
+app.use(cors());
+app.use(express.json());
+app.use(requestLogger);
+app.use(express.static("dist"));
 
 app.get("/api/notes", (req, res) => {
   Note.find({}).then((notes) => {
